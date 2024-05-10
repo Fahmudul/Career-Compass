@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import axios from "axios";
+import SERVER_API_URL from "../../api";
 const AddAJobs = () => {
   const { user } = useContext(AuthContext);
   const [startDate, setStartDate] = useState(new Date());
@@ -13,6 +15,17 @@ const AddAJobs = () => {
     const day = today.getDate().toString().padStart(2, "0");
     return `${year}-${month}-${day}`;
   }
+  const applicationDeadLineString = (deadLineDate) => {
+    const deadLineDateString = startDate.toString();
+    const date = new Date(deadLineDateString);
+
+    const year = date.getFullYear().toString().slice(-2);
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    const formattedDate = `${year}-${month}-${day}`;
+    return formattedDate;
+  };
+  // console.log(startDate.toString());
   useEffect(() => {
     setJobPostedDate(getDateToday());
   }, []);
@@ -22,14 +35,14 @@ const AddAJobs = () => {
     e.preventDefault();
     const form = e.target;
     const jobTitle = form.jobTitle.value;
-    const description = form.description.value;
+    const description = form.description.value.slice(0, 175);
     const minSalary = form.min.value;
     const maxSalary = form.max.value;
     const categoryImage = form.photoUrl.value;
     const subcategory = form.subcategory.value;
     const postedTime = jobPosteDate;
     const applicantNumber = form.applicantNumber.value;
-    const formData = {
+    const JobInfo = {
       jobTitle: jobTitle,
       description: description,
       minSalary: minSalary,
@@ -38,8 +51,18 @@ const AddAJobs = () => {
       subcategory: subcategory,
       postedTime: postedTime,
       applicantNumber: applicantNumber,
+      ownerName: user?.displayName,
+      applicationDeadLine: applicationDeadLineString(startDate),
     };
-    // console.log(formData);
+    // console.log(import.meta.env.SERVER_API_URL);
+    // send jobData to server
+    axios
+      .post(`${SERVER_API_URL}/allJobsCategory`, JobInfo)
+      .then((res) => console.log(res.data))
+      .catch((error) => {
+        console.error(error);
+      });
+    // console.log(SERVER_API_URL);
   };
   const polygonStyle = {
     clipPath: "polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%)",
@@ -48,7 +71,7 @@ const AddAJobs = () => {
     <div>
       <div className=" rounded-3xl flex flex-col lg:flex-row bg-[#ccc] justify-between w-[90%] mx-auto">
         <div
-          className=" -green-500 flex justify-center items-center rounded-tl-3xl border border-green-500 rounded-bl-3xl  bg-[#818586] w-[30%]"
+          className=" -green-500 flex justify-center items-center rounded-tl-3xl  rounded-bl-3xl  bg-[#818586] w-[30%]"
           style={polygonStyle}
         >
           <div className="text-center flex flex-col items-center gap-10">
@@ -58,9 +81,7 @@ const AddAJobs = () => {
               alt=""
             />
             <div className="flex flex-col items-center space-y-3">
-              <h1 className="text-3xl font-bold">
-                {user?.displayName}hello user
-              </h1>
+              <h1 className="text-3xl font-bold">{user?.displayName}</h1>
               <h1 className="text-2xl font-semibold">Post a Job Opportunity</h1>
               <p className="w-1/2">
                 Empower your hiring process by adding job listings. Reach
@@ -176,6 +197,7 @@ const AddAJobs = () => {
                 <input
                   type="number"
                   required
+                  defaultValue="0"
                   placeholder="Number of Applicants"
                   name="applicantNumber"
                   className="px-4 py-3   -gray-400 bg-white rounded-full hover:outline hover:outline-gray-400 text-xl"
