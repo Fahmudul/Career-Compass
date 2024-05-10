@@ -1,0 +1,10 @@
+.clip-path-container {
+    clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
+  }
+  
+  /* Media query for mobile devices */
+  @media screen and (max-width: 768px) {
+    .clip-path-container {
+      clip-path: polygon(100% 0%, 100% 34%, 100% 54%, 51% 81%, 0 55%, 0 0);
+    }
+  }
