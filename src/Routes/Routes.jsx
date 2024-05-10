@@ -9,6 +9,7 @@ import AddAJobs from "../Pages/AddAJobs/AddAJobs";
 import MyJobs from "../Pages/MyJobs/MyJobs";
 import Blogs from "../Pages/Blogs/Blogs";
 import PrivateRoute from "./PrivateRoute";
+import SERVER_API_URL from "../api";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+        loader: () => fetch(`${SERVER_API_URL}/allJobsCategory`),
       },
       {
         path: "/signin",

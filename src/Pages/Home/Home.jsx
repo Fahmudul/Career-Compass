@@ -17,9 +17,10 @@ import "swiper/css/bundle";
 import "swiper/css/free-mode";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/autoplay";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import "./Home.css";
+import JobCard from "../Component/JobCard/JobCard";
 function JobCategoryCard({ title, description }) {
   return (
     <div className="lg:w-[35%] text-left  shadow-lg rounded-lg overflow-hidden m-4 bg-blur text-white">
@@ -41,6 +42,25 @@ function JobCategoryCard({ title, description }) {
 }
 
 const Home = () => {
+  // Get list of Job data from data base
+  const jobCategoriesInfo = useLoaderData();
+  // console.log(jobCategoriesInfo);
+  const onSiteJobs = jobCategoriesInfo.filter(
+    (job) => job.subcategory === "On-Site Job"
+  );
+  // console.log("onSiteJobs", onSiteJobs);
+  const remoteJobs = jobCategoriesInfo.filter(
+    (job) => job.subcategory === "Remote Job"
+  );
+  // console.log("remoteJobs", remoteJobs);
+  const hybridJobs = jobCategoriesInfo.filter(
+    (job) => job.subcategory === "Hybrid"
+  );
+  // console.log("hybridJobs", hybridJobs);
+  const partTimeJobs = jobCategoriesInfo.filter(
+    (job) => job.subcategory === "Part-Time"
+  );
+  // console.log("partTimeJobs", partTimeJobs);
   const tabStyle = {
     padding: "0px 10px",
   };
@@ -102,25 +122,47 @@ const Home = () => {
         <h1 className="font-bold  text-center text-3xl  md:text-4xl lg:text-5xl lg:mb-10">
           Navigate Your Career
         </h1>
-        <Tabs className="-500 text-center">
-          <TabList className="">
-            <Tab style={{ padding: "5px 20px" }}>On-Site Job</Tab>
-            <Tab style={{ padding: "5px 20px" }}>Remote Job</Tab>
-            <Tab style={{ padding: "5px 20px" }}>Hybrid</Tab>
-            <Tab style={{ padding: "5px 20px" }}>Part-Time</Tab>
+        <Tabs className=" text-center">
+          <TabList style={{ marginBottom: "60px" }}>
+            <Tab style={{ padding: "5px 20px", fontSize: "20px" }}>
+              On-Site Job
+            </Tab>
+            <Tab style={{ padding: "5px 20px", fontSize: "20px" }}>
+              Remote Job
+            </Tab>
+            <Tab style={{ padding: "5px 20px", fontSize: "20px" }}>Hybrid</Tab>
+            <Tab style={{ padding: "5px 20px", fontSize: "20px" }}>
+              Part-Time
+            </Tab>
           </TabList>
 
           <TabPanel>
-            <h2>Any content 1</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-9">
+              {onSiteJobs.map((job) => (
+                <JobCard key={job._id}></JobCard>
+              ))}
+            </div>
           </TabPanel>
           <TabPanel>
-            <h2>Any content 2</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-9">
+              {remoteJobs.map((job) => (
+                <JobCard key={job._id}></JobCard>
+              ))}
+            </div>
           </TabPanel>
           <TabPanel>
-            <h2>Any content 3</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-9">
+              {hybridJobs.map((job) => (
+                <JobCard key={job._id}></JobCard>
+              ))}
+            </div>
           </TabPanel>
           <TabPanel>
-            <h2>Any content 4</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-9">
+              {partTimeJobs.map((job) => (
+                <JobCard key={job._id}></JobCard>
+              ))}
+            </div>
           </TabPanel>
         </Tabs>
       </div>
