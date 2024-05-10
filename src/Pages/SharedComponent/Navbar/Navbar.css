@@ -1,0 +1,27 @@
+ul li a.active {
+  border-bottom: 2px solid #494646;
+}
+
+@media screen and (max-width: 600px) {
+  ul li a.active {
+    border-bottom: 2px solid #837a7a;
+  }
+}
+
+.button {
+  outline: none;
+  border: none;
+  /* color: white; */
+  font-size: 1rem; /* Equivalent to text-base in Tailwind CSS */
+  /* background-image: linear-gradient(to right, #a3a3a3, #4b5563);  */
+  /* Equivalent to bg-gradient-to-r from-gray-400 to-gray-600 */
+}
+
+/* .button:hover {
+    background-image: linear-gradient(to right, #4b5563, #1f2937);
+    transition: background-color 0.8s ease-in-out; 
+    
+} */
+.bg-blur {
+  backdrop-filter: blur(20px);
+}

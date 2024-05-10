@@ -1,0 +1,14 @@
+:root {
+  --body_background: linear-gradient(to bottom, #F9F9F9, #EDEDED);
+  --body_color: #333333;
+  --link_color: #666666;
+}
+
+[data-theme="dark"] {
+  --body_background: linear-gradient(to bottom, #121212, #1C1C1C);
+  --body_color: #cccccc;
+  --link_color: #cccccc;
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
