@@ -1,25 +1,52 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 const AddAJobs = () => {
   const { user } = useContext(AuthContext);
+  const [startDate, setStartDate] = useState(new Date());
+  const [jobPosteDate, setJobPostedDate] = useState("");
+  function getDateToday() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = (today.getMonth() + 1).toString().padStart(2, "0");
+    const day = today.getDate().toString().padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
+  useEffect(() => {
+    setJobPostedDate(getDateToday());
+  }, []);
+
+  const polygonStyle = {
+    clipPath: "polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%)",
+  };
   return (
     <div>
-      <div className="border rounded-3xl flex flex-col lg:flex-row">
-        <div>
-          <div>
-            <img src={user?.photoURL} alt="" />
-            <div>
-              <h1>{user?.displayName}</h1>
-              <h1>Post a Job Opportunity</h1>
-              <p>
+      <div className=" rounded-3xl flex flex-col lg:flex-row bg-[#ccc]">
+        <div
+          className=" -green-500 flex justify-center items-center rounded-tl-3xl rounded-bl-3xl  bg-[#818586] w-[30%]"
+          style={polygonStyle}
+        >
+          <div className="text-center flex flex-col items-center gap-10">
+            <img
+              src={user?.photoURL}
+              className="w-[100px] h-[100px] rounded-full  -red-500"
+              alt=""
+            />
+            <div className="flex flex-col items-center space-y-3">
+              <h1 className="text-3xl font-bold">
+                {user?.displayName}hello user
+              </h1>
+              <h1 className="text-2xl font-semibold">Post a Job Opportunity</h1>
+              <p className="w-1/2">
                 Empower your hiring process by adding job listings. Reach
                 potential candidates seamlessly
               </p>
             </div>
           </div>
         </div>
-        <form action="" className="flex border border-red-500 flex-1">
-          <div className="lg:w-full border">
+        <form action="" className="flex  -red-500 flex-1 p-7">
+          <div className="lg:w-full ">
             <div className="flex flex-col px-2 py-3">
               <label className="block ml-3 text-lg font-bold mb-3">
                 Job Title
@@ -65,8 +92,18 @@ const AddAJobs = () => {
                 />
               </div>
             </div>
+            <div className="flex flex-col px-2 py-3">
+              <label className="block ml-3 text-lg font-bold mb-3">
+                Application Deadline
+              </label>
+              <DatePicker
+                selected={startDate}
+                className="text-gray-400 text-lg  py-2 rounded-full pl-3 hover:outline hover:outline-gray-400 cursor-pointer"
+                onChange={(date) => setStartDate(date)}
+              />
+            </div>
           </div>
-          <div className="lg:w-full border border-blue-500">
+          <div className="lg:w-full  -blue-500">
             <div className="flex flex-col px-2 py-3">
               <label className="block ml-3 text-lg font-bold mb-3">
                 Category Image
@@ -84,7 +121,7 @@ const AddAJobs = () => {
                 Select Category
               </label>
               <select
-                className="select select-bordered  rounded-full"
+                className="select select-ed  rounded-full"
                 name="subcategory"
               >
                 <option>On-Site Job</option>
@@ -92,6 +129,31 @@ const AddAJobs = () => {
                 <option>Hybrid</option>
                 <option>Part-Time</option>
               </select>
+            </div>
+            <div className="flex flex-col px-2 py-3">
+              <label className="block ml-3 text-lg font-bold mb-3">
+                Job Posted at
+              </label>
+              <input
+                type="text"
+                required
+                placeholder={jobPosteDate}
+                name="jobTitle"
+                disabled
+                className="px-4 py-3 cursor-not-allowed  -gray-400 bg-white rounded-full hover:outline hover:outline-gray-400 text-xl"
+              />
+            </div>
+            <div className="flex flex-col px-2 py-3">
+              <label className="block ml-3 text-lg font-bold mb-3">
+                Job Applicants
+              </label>
+              <input
+                type="number"
+                required
+                placeholder="Number of Applicants"
+                name="applicantNumber"
+                className="px-4 py-3   -gray-400 bg-white rounded-full hover:outline hover:outline-gray-400 text-xl"
+              />
             </div>
           </div>
         </form>
