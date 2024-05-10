@@ -7,7 +7,8 @@ import {
   FreeMode,
 } from "swiper/modules";
 import { Slide } from "react-awesome-reveal";
-
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import "react-tabs/style/react-tabs.css";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -40,13 +41,19 @@ function JobCategoryCard({ title, description }) {
 }
 
 const Home = () => {
+  const tabStyle = {
+    padding: "0px 10px",
+  };
   return (
     <div>
+      {/**Dynamic title */}
       <Helmet>
         <meta charSet="utf-8" />
         <title>CareerCompass | Home</title>
         <link rel="canonical" href="http://mysite.com/example" />
       </Helmet>
+      {/**Banner section */}
+
       <Swiper
         modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay, FreeMode]}
         spaceBetween={50}
@@ -89,6 +96,34 @@ const Home = () => {
           </div>
         </SwiperSlide>
       </Swiper>
+
+      {/**Category Tabs */}
+      <div className="border lg:mt-[100px]">
+        <h1 className="font-bold  text-center text-3xl  md:text-4xl lg:text-5xl lg:mb-10">
+          Navigate Your Career
+        </h1>
+        <Tabs className="-500 text-center">
+          <TabList className="">
+            <Tab style={{ padding: "5px 20px" }}>On-Site Job</Tab>
+            <Tab style={{ padding: "5px 20px" }}>Remote Job</Tab>
+            <Tab style={{ padding: "5px 20px" }}>Hybrid</Tab>
+            <Tab style={{ padding: "5px 20px" }}>Part-Time</Tab>
+          </TabList>
+
+          <TabPanel>
+            <h2>Any content 1</h2>
+          </TabPanel>
+          <TabPanel>
+            <h2>Any content 2</h2>
+          </TabPanel>
+          <TabPanel>
+            <h2>Any content 3</h2>
+          </TabPanel>
+          <TabPanel>
+            <h2>Any content 4</h2>
+          </TabPanel>
+        </Tabs>
+      </div>
     </div>
   );
 };
