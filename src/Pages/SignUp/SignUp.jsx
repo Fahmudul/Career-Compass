@@ -6,7 +6,7 @@ import {
 } from "firebase/auth";
 import { FaEye, FaEyeSlash, FaGithub, FaLock, FaUser } from "react-icons/fa";
 import { MdEmail, MdInsertPhoto } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 // import "../../../src/Utility.css";
 
 import toast from "react-hot-toast";
@@ -20,7 +20,10 @@ const SignUp = () => {
   const [show, setShow] = useState(false);
   const [error, setError] = useState("");
   const [photoUrl, setPhotoUrl] = useState("");
-
+  const navigate = useNavigate();
+  const locationn = useLocation();
+  // console.log(locationn.state);
+  const path = locationn.state || "/";
   const provider = new GoogleAuthProvider();
   const gitHubProvider = new GithubAuthProvider();
   const handleSignUp = (e) => {
@@ -52,23 +55,12 @@ const SignUp = () => {
           photoURL: photo,
           displayName: name,
         });
-        fetch("https://art-craft-store-server-lac.vercel.app/user", {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(userData),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.insertedId) {
-              toast.success("Successfully created your account");
-              setTimeout(function () {
-                location.reload();
-                window.location.href = "/";
-              }, 2000);
-            }
-          });
+        toast.success("Successfully created your account");
+        setTimeout(function () {
+          location.reload();
+          // window.location.href = "/";
+          navigate(path, { replace: true });
+        }, 2000);
       })
       .catch((error) => {
         const errorMessages = error.message;

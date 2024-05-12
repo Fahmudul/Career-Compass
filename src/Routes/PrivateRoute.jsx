@@ -1,7 +1,10 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 
 const PrivateRoute = ({ children }) => {
+  const location = useLocation();
+  console.log(location.pathname, location.state);
   const { user, loading } = useContext(AuthContext);
   if (loading) {
     return (
@@ -15,7 +18,7 @@ const PrivateRoute = ({ children }) => {
   }
 
   if (!user) {
-    return (window.location.href = "/signin");
+    return <Navigate to="/signin" state={location.pathname} replace={true} />;
   }
 };
 

@@ -1,9 +1,88 @@
-import React, { useEffect } from "react";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { useLocation } from "react-router-dom";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const ViewDetails = () => {
-  
+  const { user } = useContext(AuthContext);
+  const axiosSecure = useAxiosSecure();
+  const location = useLocation();
+  const [showModal, setShowModal] = useState(false);
+  const handleShowModal = () => {
+    const modalShow = true;
+    setShowModal(modalShow);
+    console.log(showModal);
+  };
+
+  // console.log(location.pathname);
+  const jobId = location.pathname.split("/").pop();
+
+  // Tanstack query
+  const {
+    isLoading,
+    data: JobDetails,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: "view-details",
+    queryFn: async () => {
+      const { data } = await axiosSecure(`/allJobsCategory/${jobId}`);
+      return data;
+    },
+  });
+
+  const { mutateAsync } = useMutation({
+    mutationFn: async (id) => {
+      const data = await axiosSecure.patch(
+        `/allJobsCategory/${id}`,
+        applicantInfo
+      );
+      return data;
+    },
+    onSuccess: () => {
+      setTimeout(() => {
+        const showModal = false;
+        setShowModal(showModal);
+      }, 2000);
+    },
+  });
+  // Get todays date
+  function getDateToday() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = (today.getMonth() + 1).toString().padStart(2, "0");
+    const day = today.getDate().toString().padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
+  // applicant info
+  // let resumeLink;
+
+  const applicantInfo = {
+    name: user?.displayName,
+    email: user?.email,
+    jobTitle: JobDetails?.jobTitle,
+    jobType: JobDetails?.subcategory,
+    description: JobDetails?.description,
+    ownerEmail: JobDetails?.ownerEmail,
+    ownerName: JobDetails?.ownerName,
+    salary: `${JobDetails?.minSalary}-${JobDetails?.maxSalary}`,
+    numberOfApplicant: JobDetails?.applicantNumber,
+    jobImage: JobDetails?.categoryImage,
+    AppliedTime: getDateToday(),
+    deadline: JobDetails?.applicationDeadLine,
+    // applicantResume: resumeLink,
+  };
+  const handleApplyForm = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const resumeLink = form.resumelink.value;
+    applicantInfo.applicantResume = resumeLink;
+    await mutateAsync(jobId);
+  };
+  // console.log(JobDetails);
   return (
-    <div>
+    <div className="relative">
       <section className={`shadow-2xl  rounded-3xl`}>
         <div className="container px-6 py-10 mx-auto">
           <div className="lg:-mx-6 lg:flex lg:items-center">
@@ -30,49 +109,67 @@ const ViewDetails = () => {
                 Marketing Manager at Stech
               </p>
               <div className="flex items-center justify-between mt-12 lg:justify-start">
-                <button
-                  title="left arrow"
-                  className="p-2 text-gray-800 transition-colors duration-300 border rounded-full rtl:-scale-x-100 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800 hover:bg-gray-100"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-6 h-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M15 19l-7-7 7-7"
-                    />
-                  </svg>
-                </button>
-                <button
-                  title="right arrow"
-                  className="p-2 text-gray-800 transition-colors duration-300 border rounded-full rtl:-scale-x-100 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800 lg:mx-6 hover:bg-gray-100"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-6 h-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
+                <button className="btn bg-blue-400" onClick={handleShowModal}>
+                  Apply Now
                 </button>
               </div>
             </div>
           </div>
         </div>
       </section>
+      {showModal && (
+        <>
+          <div className="flex w-full justify-center items-center   min-h-[calc(100vh-27vh)] absolute top-0 left-0 backdrop-blur-xl">
+            <div className="max-w-[480px] px-6 py-6 viewDetails rounded-3xl">
+              <h1 className="text-2xl font-bold text-center">Job Title</h1>
+              <form action="" className="space-y-3" onSubmit={handleApplyForm}>
+                <div>
+                  <label className="block ml-3 text-base font-bold mb-3">
+                    Name
+                  </label>
+                  <input
+                    type="name"
+                    name="name"
+                    defaultValue={user?.displayName}
+                    className="px-4 py-2  rounded-full hover:outline hover:outline-gray-400 text-lg w-full bg-slate-200"
+                  />
+                </div>
+                <div>
+                  <label className="block ml-3 text-base font-bold mb-3">
+                    email
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    defaultValue={user?.email}
+                    disabled
+                    className="px-4 py-2  rounded-full hover:outline hover:outline-gray-400 text-lg w-full  bg-slate-200 cursor-not-allowed"
+                  />
+                </div>
+                <div>
+                  <label className="block ml-3 text-base font-bold mb-3">
+                    Resume
+                  </label>
+                  <input
+                    type="text"
+                    name="resumelink"
+                    placeholder="Resume link"
+                    required
+                    className="px-4 py-2  rounded-full hover:outline hover:outline-gray-400 text-lg w-full bg-slate-200"
+                  />
+                </div>
+                <div className="flex justify-end">
+                  <input
+                    type="submit"
+                    value="Submit Application"
+                    className="btn bg-blue-400 mt-2"
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };

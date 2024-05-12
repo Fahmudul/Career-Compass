@@ -58,6 +58,7 @@ const AddAJobs = () => {
   const handleAddFormData = async (e) => {
     e.preventDefault();
     const form = e.target;
+
     const jobTitle = form.jobTitle.value;
     const description = form.description.value.slice(0, 175);
     const minSalary = form.min.value;
@@ -65,8 +66,9 @@ const AddAJobs = () => {
     const categoryImage = form.photoUrl.value;
     const subcategory = form.subcategory.value;
     const postedTime = jobPosteDate;
-    const applicantNumber = form.applicantNumber.value;
+    const applicantNumber = parseInt(form.applicantNumber.value);
     const JobInfo = {
+      ownerEmail: user?.email,
       jobTitle: jobTitle,
       description: description,
       minSalary: minSalary,

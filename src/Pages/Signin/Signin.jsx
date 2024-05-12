@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { FaEye, FaEyeSlash, FaLock } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import auth from "../../FireBaseConfig/FirebaseConfig";
 // import "../../../src/Utility.css";
@@ -14,19 +14,23 @@ const Signin = () => {
   const [photoUrl, setPhotoUrl] = useState("");
   const [show, setShow] = useState(false);
   const provider = new GoogleAuthProvider();
-
+  const navigate = useNavigate();
+  const location = useLocation();
+  // console.log(location.state);
+  const path = location.state || "/";
+  // console.log(location.state);
+  // console.log(navigate)
   const handleSignIn = (e) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
     const email = data.get("email");
     const password = data.get("password");
-    console.log(email, password);
     logIn(email, password)
       .then((result) => {
-        console.log(result.user);
         toast.success("Logged in Successfully");
         setTimeout(function () {
-          window.location.href = "/";
+          // window.location.href = "/";
+          navigate(path, { replace: true });
         }, 2000);
       })
       .catch((error) => {
@@ -42,17 +46,14 @@ const Signin = () => {
     console.log(show);
   };
   const handleGoogleSignIn = () => {
-    // console.log(GoogleSignIn);
-
     signInWithPopup(auth, provider)
       .then((result) => {
-        console.log(result.user);
         const photoUrl = result.user?.photoURL;
         setPhotoUrl(photoUrl);
         toast.success("Successfully created your account");
         setTimeout(function () {
           location.reload();
-          window.location.href = "/";
+          navigate(path, { replace: true });
         }, 2000);
       })
       .catch((error) => {
