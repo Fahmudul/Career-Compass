@@ -15,3 +15,8 @@ a {
 p {
   color: var(--body_color);
 }
+
+
+.viewDetails{
+  background-color: var(--card_color);
+}

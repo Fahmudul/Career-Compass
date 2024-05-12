@@ -2,12 +2,36 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import axios from "axios";
 import SERVER_API_URL from "../../api";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 const AddAJobs = () => {
+  const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);
   const [startDate, setStartDate] = useState(new Date());
   const [jobPosteDate, setJobPostedDate] = useState("");
+  // Tanstack Query
+  const queryClient = useQueryClient();
+  const {
+    data = [],
+    isLoading,
+    error,
+    isError,
+    refetch,
+  } = useQuery({
+    queryKey: "add-jobs",
+  });
+
+  const { mutateAsync } = useMutation({
+    mutationFn: async (info) => {
+      const data = await axiosSecure.post(`/allJobsCategory`, info);
+      console.log(data);
+    },
+    onSuccess: () => {
+      console.log("added to database");
+      refetch();
+    },
+  });
   function getDateToday() {
     const today = new Date();
     const year = today.getFullYear();
@@ -31,7 +55,7 @@ const AddAJobs = () => {
   }, []);
 
   // handle Form Submission
-  const handleAddFormData = (e) => {
+  const handleAddFormData = async (e) => {
     e.preventDefault();
     const form = e.target;
     const jobTitle = form.jobTitle.value;
@@ -54,14 +78,11 @@ const AddAJobs = () => {
       ownerName: user?.displayName,
       applicationDeadLine: applicationDeadLineString(startDate),
     };
+
     // console.log(import.meta.env.SERVER_API_URL);
     // send jobData to server
-    axios
-      .post(`${SERVER_API_URL}/allJobsCategory`, JobInfo)
-      .then((res) => console.log(res.data))
-      .catch((error) => {
-        console.error(error);
-      });
+    await mutateAsync(JobInfo);
+
     // console.log(SERVER_API_URL);
   };
   const polygonStyle = {

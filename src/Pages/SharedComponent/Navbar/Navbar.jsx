@@ -69,7 +69,7 @@ const Navbar = () => {
       data-aos-duration="1000"
       data-aos-easing="ease-in-out"
     >
-      <div className="navbar bg-transparent pt-5 px-0 flex justify-between">
+      <div className="navbar  pt-5 px-0 flex justify-between">
         <div className="navbar-start  w-auto flex flex-1 lg:flex-none">
           <div className="dropdown ">
             <div
@@ -94,7 +94,7 @@ const Navbar = () => {
             </div>
             <div
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3  rounded-box backdrop-blur-lg z-20  w-[300px]  p-3 border border-red-500"
+              className="menu menu-sm dropdown-content mt-3  rounded-box  z-20 bg-base-100 w-[300px]  p-3 "
             >
               <div className="mb-5 flex justify-center flex-col items-center">
                 <img src={user?.photoURL} className="w-20 h-20 rounded-full " />

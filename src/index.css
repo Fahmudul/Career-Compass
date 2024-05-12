@@ -1,13 +1,15 @@
 :root {
-  --body_background: linear-gradient(to bottom, #F9F9F9, #EDEDED);
+  --body_background: linear-gradient(to bottom, #f9f9f9, #ededed);
   --body_color: #333333;
   --link_color: #666666;
+  --card_color: white;
 }
 
 [data-theme="dark"] {
-  --body_background: linear-gradient(to bottom, #121212, #1C1C1C);
+  --body_background: linear-gradient(to bottom, #121212, #1c1c1c);
   --body_color: #cccccc;
   --link_color: #cccccc;
+  --card_color: #212121;
 }
 @tailwind base;
 @tailwind components;

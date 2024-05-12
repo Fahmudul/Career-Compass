@@ -10,6 +10,7 @@ import MyJobs from "../Pages/MyJobs/MyJobs";
 import Blogs from "../Pages/Blogs/Blogs";
 import PrivateRoute from "./PrivateRoute";
 import SERVER_API_URL from "../api";
+import ViewDetails from "../Pages/ViewDetails/ViewDetails";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -32,6 +33,7 @@ const router = createBrowserRouter([
       {
         path: "/allJobs",
         element: <AllJobs></AllJobs>,
+        // loader: () => fetch(`${SERVER_API_URL}/allJobsCategory`),
       },
       {
         path: "/appliedJobs",
@@ -52,6 +54,17 @@ const router = createBrowserRouter([
       {
         path: "/blogs",
         element: <Blogs></Blogs>,
+      },
+      {
+        path: "/jobDetails/:id",
+        element: (
+          <PrivateRoute>
+            <ViewDetails></ViewDetails>,
+          </PrivateRoute>
+        ),
+        // loader: () => fetch(`${SERVER_API_URL}/allJobsCategory`),
+        // loader: ({ params }) =>
+        //   fetch(`${SERVER_API_URL}/allJobsCategory/${params.id}`),
       },
     ],
   },
