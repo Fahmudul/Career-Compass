@@ -118,57 +118,56 @@ const ViewDetails = () => {
         </div>
       </section>
       {showModal && (
-        <>
-          <div className="flex w-full justify-center items-center   min-h-[calc(100vh-27vh)] absolute top-0 left-0 backdrop-blur-xl">
-            <div className="max-w-[480px] px-6 py-6 viewDetails rounded-3xl">
-              <h1 className="text-2xl font-bold text-center">Job Title</h1>
-              <form action="" className="space-y-3" onSubmit={handleApplyForm}>
-                <div>
-                  <label className="block ml-3 text-base font-bold mb-3">
-                    Name
-                  </label>
-                  <input
-                    type="name"
-                    name="name"
-                    defaultValue={user?.displayName}
-                    className="px-4 py-2  rounded-full hover:outline hover:outline-gray-400 text-lg w-full bg-slate-200"
-                  />
-                </div>
-                <div>
-                  <label className="block ml-3 text-base font-bold mb-3">
-                    email
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    defaultValue={user?.email}
-                    disabled
-                    className="px-4 py-2  rounded-full hover:outline hover:outline-gray-400 text-lg w-full  bg-slate-200 cursor-not-allowed"
-                  />
-                </div>
-                <div>
-                  <label className="block ml-3 text-base font-bold mb-3">
-                    Resume
-                  </label>
-                  <input
-                    type="text"
-                    name="resumelink"
-                    placeholder="Resume link"
-                    required
-                    className="px-4 py-2  rounded-full hover:outline hover:outline-gray-400 text-lg w-full bg-slate-200"
-                  />
-                </div>
-                <div className="flex justify-end">
-                  <input
-                    type="submit"
-                    value="Submit Application"
-                    className="btn bg-blue-400 mt-2"
-                  />
-                </div>
-              </form>
-            </div>
+        <div className="flex w-full justify-center items-center   min-h-[calc(100vh-27vh)] absolute top-0 left-0 backdrop-blur-xl">
+          <div className="max-w-[480px] p-11 viewDetails rounded-3xl relative">
+            <div className="h-[360px] bg-black w-2 absolute border left-5"></div>
+            <h1 className="text-2xl font-bold text-center">Job Title</h1>
+            <form action="" className="space-y-3" onSubmit={handleApplyForm}>
+              <div>
+                <label className="block ml-3 text-base font-bold mb-3">
+                  Name
+                </label>
+                <input
+                  type="name"
+                  name="name"
+                  defaultValue={user?.displayName}
+                  className="px-4 py-2  rounded-full hover:outline hover:outline-gray-400 text-lg w-full bg-slate-200"
+                />
+              </div>
+              <div>
+                <label className="block ml-3 text-base font-bold mb-3">
+                  email
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  defaultValue={user?.email}
+                  disabled
+                  className="px-4 py-2  rounded-full hover:outline hover:outline-gray-400 text-lg w-full  bg-slate-200 cursor-not-allowed"
+                />
+              </div>
+              <div>
+                <label className="block ml-3 text-base font-bold mb-3">
+                  Resume
+                </label>
+                <input
+                  type="text"
+                  name="resumelink"
+                  placeholder="Resume link"
+                  required
+                  className="px-4 py-2  rounded-full hover:outline hover:outline-gray-400 text-lg w-full bg-slate-200"
+                />
+              </div>
+              <div className="flex justify-center">
+                <input
+                  type="submit"
+                  value="Submit Application"
+                  className="btn bg-blue-400 mt-2"
+                />
+              </div>
+            </form>
           </div>
-        </>
+        </div>
       )}
     </div>
   );

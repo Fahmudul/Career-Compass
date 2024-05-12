@@ -22,7 +22,7 @@ const AppliedJobs = () => {
       return data;
     },
   });
-  console.log(appliedJobs);
+//   console.log(appliedJobs);
   return (
     <div>
       <div className="w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800">
