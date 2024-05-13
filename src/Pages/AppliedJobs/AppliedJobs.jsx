@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { useContext, useState } from "react";
-import { FaDownload } from "react-icons/fa6";
+import { BiDetail } from "react-icons/bi";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
+import { Link } from "react-router-dom";
 
 const AppliedJobs = () => {
   const [appliedJobs, setAppliedJobs] = useState([]);
@@ -35,13 +36,30 @@ const AppliedJobs = () => {
         (job) => job.jobType == filteredValue
       );
       setCategoryJob(filteredCategory);
-      console.log(filteredCategory);
+      // console.log(filteredCategory);
       // console.log(categoryJob);
     }
   };
   // console.log(appliedJobs);
 
   // console.log(categoryJob);
+  if (categoryJob.length <= 0) {
+    return (
+      <div>
+        <p className="font-bold text-xl lg:text-4xl text-center ">
+          No Job Applied yet!
+        </p>
+        <p className="text-center mt-5">
+          <Link
+            to="/allJobs"
+            className="text-blue-500 font-bold text-lg underline "
+          >
+            Apply from here ->
+          </Link>
+        </p>
+      </div>
+    );
+  }
   return (
     <div className="">
       <div className="flex justify-end mb-5">
@@ -137,10 +155,12 @@ const AppliedJobs = () => {
                   <h1 className="px-2 text-sm">California</h1>
                 </div>
                 <div className="flex justify-end">
-                  <button className="btn flex items-center mt-4 text-gray-700 dark:text-gray-200">
-                    <FaDownload className="w-6 h-6" />
-                    <h1 className=" text-sm">Download Summary</h1>
-                  </button>
+                  <Link to={`/appliedApplicants/${job._id}`}>
+                    <button className="btn flex items-center mt-4 text-gray-700 dark:text-gray-200">
+                      <BiDetail className="w-6 h-6" />
+                      <h1 className=" text-sm">View Summary</h1>
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>

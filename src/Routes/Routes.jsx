@@ -12,11 +12,13 @@ import PrivateRoute from "./PrivateRoute";
 import SERVER_API_URL from "../api";
 import ViewDetails from "../Pages/ViewDetails/ViewDetails";
 import UpdateJobInfo from "../Pages/MyJobs/UpdateJobInfo";
+import ErrorElement from "../ErrorElement/ErrorElement";
+import SummaryPage from "../Pages/AppliedJobs/SummaryPage";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
-    // errorElement: <ErrorElements></ErrorElements>,
+    errorElement: <ErrorElement></ErrorElement>,
     children: [
       {
         path: "/",
@@ -41,6 +43,10 @@ const router = createBrowserRouter([
         element: <AppliedJobs></AppliedJobs>,
       },
       {
+        path: "/appliedApplicants/:id",
+        element: <SummaryPage></SummaryPage>,
+      },
+      {
         path: "/addJobs",
         element: (
           <PrivateRoute>
@@ -50,7 +56,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/myJobs",
-        element: <MyJobs></MyJobs>,
+        element: (
+          <PrivateRoute>
+            <MyJobs></MyJobs>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/blogs",

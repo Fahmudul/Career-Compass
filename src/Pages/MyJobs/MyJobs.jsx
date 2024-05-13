@@ -60,7 +60,7 @@ const MyJobs = () => {
     });
   };
 
-  // console.log(myPostedJobs);
+  console.log(myPostedJobs);
   return (
     <div>
       <div className="flex flex-col mt-6">
