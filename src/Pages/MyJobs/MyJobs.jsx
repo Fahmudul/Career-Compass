@@ -20,6 +20,7 @@ const MyJobs = () => {
       const { data } = await axiosSecure(`/myPostedJobs/?email=${user.email}`);
       return data;
     },
+    
   });
   const { mutateAsync } = useMutation({
     mutationFn: async (id) => {

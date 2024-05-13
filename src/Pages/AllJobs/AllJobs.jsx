@@ -2,8 +2,11 @@ import { useLoaderData } from "react-router-dom";
 import TableRow from "./TableRow";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { useState } from "react";
 const AllJobs = () => {
   const axiosSecure = useAxiosSecure();
+  const [searchValue, setSearchValue] = useState("");
+  // console.log(searchValue)
   const {
     isPending,
     isError,
@@ -22,6 +25,15 @@ const AllJobs = () => {
   }
   return (
     <div>
+      <h1 className="text-5xl font-bold text-center mb-10">
+        Explore Opportunities
+      </h1>
+      <input
+        type="text"
+        placeholder="Search by job title"
+        className="input input-bordered w-full max-w-xs"
+        onChange={(e) => setSearchValue(e.target.value)}
+      />
       <div className="flex flex-col mt-6">
         <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
@@ -87,9 +99,15 @@ const AllJobs = () => {
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
-                  {jobCategoriesInfo.map((job) => (
-                    <TableRow key={job._id} job={job}></TableRow>
-                  ))}
+                  {jobCategoriesInfo
+                    .filter((job) => {
+                      return searchValue.toLowerCase() === ""
+                        ? job
+                        : job.jobTitle.toLowerCase().includes(searchValue);
+                    })
+                    .map((job) => (
+                      <TableRow key={job._id} job={job}></TableRow>
+                    ))}
                 </tbody>
               </table>
             </div>

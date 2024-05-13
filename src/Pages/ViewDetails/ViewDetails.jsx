@@ -3,6 +3,9 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useLocation } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
+import toast from "react-hot-toast";
+
 
 const ViewDetails = () => {
   const { user } = useContext(AuthContext);
@@ -12,16 +15,15 @@ const ViewDetails = () => {
   const handleShowModal = () => {
     const modalShow = true;
     setShowModal(modalShow);
-    console.log(showModal);
+    // console.log(showModal);
   };
 
   // console.log(location.pathname);
   const jobId = location.pathname.split("/").pop();
-
   // Tanstack query
   const {
     isLoading,
-    data: JobDetails,
+    data: JobDetails = {},
     isError,
     error,
   } = useQuery({
@@ -31,6 +33,8 @@ const ViewDetails = () => {
       return data;
     },
   });
+  // console.log(user?.email);
+  // console.log(JobDetails?.ownerEmail);
 
   const { mutateAsync } = useMutation({
     mutationFn: async (id) => {
@@ -41,9 +45,11 @@ const ViewDetails = () => {
       return data;
     },
     onSuccess: () => {
+      toast.success("Applied Successfully");
+      const showModal = false;
+      setShowModal(showModal);
       setTimeout(() => {
-        const showModal = false;
-        setShowModal(showModal);
+        window.location.href ='/appliedJobs'
       }, 2000);
     },
   });
@@ -57,7 +63,10 @@ const ViewDetails = () => {
   }
   // applicant info
   // let resumeLink;
-
+  const closeModal = () => {
+    const showModal = false;
+    setShowModal(showModal);
+  };
   const applicantInfo = {
     name: user?.displayName,
     email: user?.email,
@@ -78,7 +87,18 @@ const ViewDetails = () => {
     const form = e.target;
     const resumeLink = form.resumelink.value;
     applicantInfo.applicantResume = resumeLink;
-    await mutateAsync(jobId);
+    if (user?.email == JobDetails?.ownerEmail) {
+      // console.log("matched");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "You can't apply on your posted Job",
+        footer: '<a href="#">Why do I have this issue?</a>',
+      });
+    } else {
+      await mutateAsync(jobId);
+      // console.log("no matched");
+    }
   };
   // console.log(JobDetails);
   return (
@@ -120,8 +140,26 @@ const ViewDetails = () => {
       {showModal && (
         <div className="flex w-full justify-center items-center   min-h-[calc(100vh-27vh)] absolute top-0 left-0 backdrop-blur-xl">
           <div className="max-w-[480px] p-11 viewDetails rounded-3xl relative">
-            <div className="h-[360px] bg-black w-2 absolute border left-5"></div>
             <h1 className="text-2xl font-bold text-center">Job Title</h1>
+            <button
+              className="btn btn-circle absolute top-2 right-2 text-red-700 "
+              onClick={() => closeModal()}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
             <form action="" className="space-y-3" onSubmit={handleApplyForm}>
               <div>
                 <label className="block ml-3 text-base font-bold mb-3">
