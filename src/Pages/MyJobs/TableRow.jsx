@@ -44,10 +44,9 @@ const TableRow = ({ job, handleDeleteButton, handleUpdateButton }) => {
           <RiDeleteBin5Line className="w-6 h-6 mr-5 hover:fill-red-400" />
         </button>
         <button className="">
-          <FaRegEdit
-            onClick={() => handleUpdateButton(_id, "update")}
-            className="w-6 h-6 hover:fill-blue-600"
-          />
+          <Link to={`/updateJobInfo/${_id}`}>
+            <FaRegEdit className="w-6 h-6 hover:fill-blue-600" />
+          </Link>
         </button>
       </td>
     </tr>

@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import TableRow from "./TableRow";
+import Swal from "sweetalert2";
 const MyJobs = () => {
+  const [deletedCount, setDeletedCount] = useState(1);
   const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
   const {
@@ -12,6 +13,7 @@ const MyJobs = () => {
     data: myPostedJobs = [],
     error,
     isError,
+    refetch,
   } = useQuery({
     queryKey: "my-jobs",
     queryFn: async () => {
@@ -19,16 +21,44 @@ const MyJobs = () => {
       return data;
     },
   });
+  const { mutateAsync } = useMutation({
+    mutationFn: async (id) => {
+      const { data } = await axiosSecure.delete(`/myPostedJobs/${id}`);
+      return data;
+    },
+    onSuccess: (data) => {
+      console.log(data);
+      setDeletedCount(data?.deletedCount);
+      refetch();
+    },
+  });
 
-  const handleDeleteButton = async (id, name) => {
-    const { data } = await axiosSecure.delete(`/myPostedJobs/${id}`);
+  const handleDeleteButton = async (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        mutateAsync(id);
 
-    // console.log(name);
+        if (deletedCount > 0) {
+          console.log(deletedCount);
+          Swal.fire({
+            title: "Deleted!",
+            text: "Job has been deleted.",
+            icon: "success",
+          });
+          setDeletedCount(1);
+        }
+      }
+    });
   };
-  const handleUpdateButton = async (id, name) => {
-    const { data } = await axiosSecure.patch(`/myPostedJobs/${id}`);
-    // console.log(name);
-  };
+
   // console.log(myPostedJobs);
   return (
     <div>
@@ -101,7 +131,6 @@ const MyJobs = () => {
                     <TableRow
                       key={job._id}
                       job={job}
-                      handleUpdateButton={handleUpdateButton}
                       handleDeleteButton={handleDeleteButton}
                     ></TableRow>
                   ))}
