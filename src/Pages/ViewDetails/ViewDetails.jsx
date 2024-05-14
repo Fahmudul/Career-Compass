@@ -47,9 +47,9 @@ const ViewDetails = () => {
       toast.success("Applied Successfully");
       const showModal = false;
       setShowModal(showModal);
-      // setTimeout(() => {
-      //   window.location.href = "/appliedJobs";
-      // }, 1500);
+      setTimeout(() => {
+        window.location.href = "/appliedJobs";
+      }, 1500);
     },
   });
   // Get todays date
@@ -100,16 +100,14 @@ const ViewDetails = () => {
     const resumeLink = form.resumelink.value;
     applicantInfo.applicantResume = resumeLink;
     if (user?.email == JobDetails?.ownerEmail) {
-      // console.log("matched");
+      console.log("matched");
       Swal.fire({
         icon: "error",
         title: "Oops...",
         text: "You can't apply on your posted Job",
         footer: '<a href="#">Why do I have this issue?</a>',
       });
-    }
-
-    if (!deadLineOver()) {
+    } else if (!deadLineOver()) {
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -118,7 +116,7 @@ const ViewDetails = () => {
       });
     } else {
       await mutateAsync(jobId);
-      // console.log("no matched");
+      console.log("no matched");
     }
   };
   console.log(JobDetails);
@@ -129,26 +127,31 @@ const ViewDetails = () => {
           <div className="lg:-mx-6 lg:flex lg:items-center">
             <img
               className="object-cover object-center lg:w-1/2 lg:mx-6 w-full h-96 rounded-lg lg:h-[36rem]"
-              src="https://images.unsplash.com/photo-1499470932971-a90681ce8530?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+              src={JobDetails.categoryImage}
               alt=""
             />
             <div className="mt-8 lg:w-1/2 lg:px-6 lg:mt-0">
               <p className="text-5xl font-semibold text-blue-500 ">“</p>
               <h1 className="text-2xl font-semibold text-gray-800 dark:text-white lg:text-3xl lg:w-96">
-                Help us improve our productivity
+                {JobDetails.jobTitle}
               </h1>
               <p className="max-w-lg mt-6 text-gray-500 dark:text-gray-400 ">
-                “ Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Tempore quibusdam ducimus libero ad tempora doloribus expedita
-                laborum saepe voluptas perferendis delectus assumenda rerum,
-                culpa aperiam dolorum, obcaecati corrupti aspernatur a. ”
+                “ {JobDetails.description} ”
               </p>
-              <h3 className="mt-6 text-lg font-medium text-blue-500">
-                Mia Brown
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300">
-                Marketing Manager at Stech
-              </p>
+              <div className="space-y-3">
+                <h3 className="mt-6 text-lg font-medium text-blue-500">
+                  Budget
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300 text-lg font-bold">
+                  {JobDetails.minSalary}-{JobDetails.maxSalary}$
+                </p>
+                <p className="text-lg font-semibold">
+                  Already applied :{" "}
+                  <span className="text-blue-500">
+                    {JobDetails.applicantNumber}
+                  </span>
+                </p>
+              </div>
               <div className="flex items-center justify-between mt-12 lg:justify-start">
                 <button className="btn bg-blue-400" onClick={handleShowModal}>
                   Apply Now

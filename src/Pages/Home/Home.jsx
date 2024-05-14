@@ -118,7 +118,7 @@ const Home = () => {
       </Swiper>
 
       {/**Category Tabs */}
-      <div className="border lg:mt-[100px]">
+      <div className=" lg:mt-[100px]">
         <h1 className="font-bold  text-center text-3xl  md:text-4xl lg:text-5xl lg:mb-10">
           Navigate Your Career
         </h1>
