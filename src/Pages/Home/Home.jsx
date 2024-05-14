@@ -137,30 +137,30 @@ const Home = () => {
           </TabList>
 
           <TabPanel>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-9">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-9">
               {onSiteJobs.map((job) => (
-                <JobCard key={job._id}></JobCard>
+                <JobCard key={job._id} job={job}></JobCard>
               ))}
             </div>
           </TabPanel>
           <TabPanel>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-9">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-9">
               {remoteJobs.map((job) => (
-                <JobCard key={job._id}></JobCard>
+                <JobCard key={job._id} job={job}></JobCard>
               ))}
             </div>
           </TabPanel>
           <TabPanel>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-9">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-9">
               {hybridJobs.map((job) => (
-                <JobCard key={job._id}></JobCard>
+                <JobCard key={job._id} job={job}></JobCard>
               ))}
             </div>
           </TabPanel>
           <TabPanel>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-9">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-9">
               {partTimeJobs.map((job) => (
-                <JobCard key={job._id}></JobCard>
+                <JobCard key={job._id} job={job}></JobCard>
               ))}
             </div>
           </TabPanel>

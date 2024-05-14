@@ -1,12 +1,32 @@
-const JobCard = () => {
+import { Link } from "react-router-dom";
+
+const JobCard = ({ job }) => {
+  const {
+    categoryImage,
+    minSalary,
+    maxSalary,
+    applicantNumber,
+    ownerName,
+    applicationDeadLine,
+    postedTime,
+    _id,
+  } = job;
   return (
     <div>
-      <div className="min-w-xl max-w-[400px] overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
+      <div className="min-w-xl max-w-[400px] overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 relative">
         <img
           className="object-cover w-full h-64"
-          src="https://images.unsplash.com/photo-1550439062-609e1531270e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+          src={categoryImage}
           alt="Article"
         />
+        <div className="absolute top-0 backdrop-blur-xl p-3">
+          <span className="text-lg text-[#ccc] dark:text-gray-300 font-semibold">
+            Posted on : {postedTime}
+          </span>
+          <div className="text-lg text-[#ccc] dark:text-gray-300 font-semibold">
+            Deadline : {applicationDeadLine}
+          </div>
+        </div>
         <div className="p-6">
           <div>
             <span className="text-xs font-medium text-blue-600 uppercase dark:text-blue-400">
@@ -28,25 +48,22 @@ const JobCard = () => {
             </p>
           </div>
           <div className="mt-4">
-            <div className="flex items-center">
-              <div className="flex items-center">
+            <div className="flex items-center my-3 justify-between">
+              <div className="flex items-center ">
                 <img
                   className="object-cover h-10 rounded-full"
                   src="https://images.unsplash.com/photo-1586287011575-a23134f797f9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=48&q=60"
                   alt="Avatar"
                 />
-                <a
-                  href="#"
-                  className="mx-2 font-semibold text-gray-700 dark:text-gray-200"
-                  tabIndex={0}
-                  role="link"
-                >
-                  Jone Doe
-                </a>
+                <p className="mx-2 font-semibold text-gray-700 dark:text-gray-200 max-w-[100px]">
+                  {ownerName}
+                </p>
               </div>
-              <span className="mx-1 text-xs text-gray-600 dark:text-gray-300">
-                21 SEP 2015
-              </span>
+              <div className="flex items-center ju">
+                <Link to={`/jobDetails/${_id}`}>
+                  <button className="btn px-2 py-1">View details</button>
+                </Link>
+              </div>
             </div>
           </div>
         </div>

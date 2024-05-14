@@ -4,6 +4,7 @@ import DatePicker from "react-datepicker";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import toast from "react-hot-toast";
 
 const UpdateJobInfo = () => {
   const axiosSecure = useAxiosSecure();
@@ -25,6 +26,12 @@ const UpdateJobInfo = () => {
       );
       return data;
     },
+    onSuccess: () => {
+      toast.success("Job updated successfully");
+      setTimeout(() => {
+        window.location.href = "/myJobs";
+      }, 1500);
+    },
   });
 
   console.log(JobDetails);
@@ -34,7 +41,12 @@ const UpdateJobInfo = () => {
   //   const [jobPosteDate, setJobPostedDate] = useState("");
 
   const applicationDeadLineString = (deadLineDate) => {
-    return deadLineDate.toLocaleDateString();
+    const deadLineString = deadLineDate.toLocaleDateString();
+    const ddmmyy = deadLineString.split("/");
+    console.log(ddmmyy);
+    const formattedDate = `${ddmmyy[2]}/${ddmmyy[1]}/${ddmmyy[0]}`;
+    console.log(formattedDate);
+    return formattedDate;
   };
   // console.log(startDate.toString());
 

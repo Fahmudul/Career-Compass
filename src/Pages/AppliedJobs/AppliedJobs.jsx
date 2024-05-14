@@ -79,92 +79,110 @@ const AppliedJobs = () => {
         </div>
       </div>
       <div className="">
-        <div className="grid grid-cols-4 gap-y-5 mx-auto ">
-          {categoryJob.map((job) => (
-            <div
-              key={job._id}
-              className="w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800"
-            >
-              <img
-                className="object-cover object-center w-full h-56"
-                src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-                alt="avatar"
-              />
-              <div className="flex items-center px-6 py-3 bg-gray-900">
-                <svg
-                  aria-label="headphones icon"
-                  className="w-6 h-6 text-white fill-current"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M17 21C15.8954 21 15 20.1046 15 19V15C15 13.8954 15.8954 13 17 13H19V12C19 8.13401 15.866 5 12 5C8.13401 5 5 8.13401 5 12V13H7C8.10457 13 9 13.8954 9 15V19C9 20.1046 8.10457 21 7 21H3V12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12V21H17ZM19 15H17V19H19V15ZM7 15H5V19H7V15Z"
-                  />
-                </svg>
-                <h1 className="mx-3 text-lg font-semibold text-white">
-                  Focusing
-                </h1>
-              </div>
-              <div className="px-6 py-4">
-                <h1 className="text-xl font-semibold text-gray-800 dark:text-white">
-                  Patterson johnson
-                </h1>
-                <p className="py-2 text-gray-700 dark:text-gray-400">
-                  Full Stack maker &amp; UI / UX Designer , love hip hop music
-                  Author of Building UI.
-                </p>
-                <div className="flex items-center mt-4 text-gray-700 dark:text-gray-200">
-                  <svg
-                    aria-label="suitcase icon"
-                    className="w-6 h-6 fill-current"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M14 11H10V13H14V11Z" />
-                    <path
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M7 5V4C7 2.89545 7.89539 2 9 2H15C16.1046 2 17 2.89545 17 4V5H20C21.6569 5 23 6.34314 23 8V18C23 19.6569 21.6569 21 20 21H4C2.34314 21 1 19.6569 1 18V8C1 6.34314 2.34314 5 4 5H7ZM9 4H15V5H9V4ZM4 7C3.44775 7 3 7.44769 3 8V14H21V8C21 7.44769 20.5522 7 20 7H4ZM3 18V16H21V18C21 18.5523 20.5522 19 20 19H4C3.44775 19 3 18.5523 3 18Z"
-                    />
-                  </svg>
-                  <h1 className="px-2 text-sm">{job?.jobType}</h1>
-                </div>
-                <div className="flex items-center mt-4 text-gray-700 dark:text-gray-200">
-                  <svg
-                    aria-label="location pin icon"
-                    className="w-6 h-6 fill-current"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M16.2721 10.2721C16.2721 12.4813 14.4813 14.2721 12.2721 14.2721C10.063 14.2721 8.27214 12.4813 8.27214 10.2721C8.27214 8.063 10.063 6.27214 12.2721 6.27214C14.4813 6.27214 16.2721 8.063 16.2721 10.2721ZM14.2721 10.2721C14.2721 11.3767 13.3767 12.2721 12.2721 12.2721C11.1676 12.2721 10.2721 11.3767 10.2721 10.2721C10.2721 9.16757 11.1676 8.27214 12.2721 8.27214C13.3767 8.27214 14.2721 9.16757 14.2721 10.2721Z"
-                    />
-                    <path
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M5.79417 16.5183C2.19424 13.0909 2.05438 7.3941 5.48178 3.79418C8.90918 0.194258 14.6059 0.0543983 18.2059 3.48179C21.8058 6.90919 21.9457 12.606 18.5183 16.2059L12.3124 22.7241L5.79417 16.5183ZM17.0698 14.8268L12.243 19.8965L7.17324 15.0698C4.3733 12.404 4.26452 7.9732 6.93028 5.17326C9.59603 2.37332 14.0268 2.26454 16.8268 4.93029C19.6267 7.59604 19.7355 12.0269 17.0698 14.8268Z"
-                    />
-                  </svg>
-                  <h1 className="px-2 text-sm">California</h1>
-                </div>
-                <div className="flex justify-end">
-                  <Link to={`/appliedApplicants/${job._id}`}>
-                    <button className="btn flex items-center mt-4 text-gray-700 dark:text-gray-200">
-                      <BiDetail className="w-6 h-6" />
-                      <h1 className=" text-sm">View Summary</h1>
-                    </button>
-                  </Link>
-                </div>
+        <div className="flex flex-col mt-6">
+          <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+              <div className="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
+                <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                  <thead className="bg-gray-50 dark:bg-gray-800">
+                    <tr className="text-xl">
+                      <th
+                        scope="col"
+                        className="py-3.5 px-4 text-xl font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                      >
+                        <button className="flex items-center gap-x-3 focus:outline-none">
+                          <span>Job Title</span>
+                          <svg
+                            className="h-3"
+                            viewBox="0 0 10 11"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M2.13347 0.0999756H2.98516L5.01902 4.79058H3.86226L3.45549 3.79907H1.63772L1.24366 4.79058H0.0996094L2.13347 0.0999756ZM2.54025 1.46012L1.96822 2.92196H3.11227L2.54025 1.46012Z"
+                              fill="currentColor"
+                              stroke="currentColor"
+                              strokeWidth="0.1"
+                            />
+                            <path
+                              d="M0.722656 9.60832L3.09974 6.78633H0.811638V5.87109H4.35819V6.78633L2.01925 9.60832H4.43446V10.5617H0.722656V9.60832Z"
+                              fill="currentColor"
+                              stroke="currentColor"
+                              strokeWidth="0.1"
+                            />
+                            <path
+                              d="M8.45558 7.25664V7.40664H8.60558H9.66065C9.72481 7.40664 9.74667 7.42274 9.75141 7.42691C9.75148 7.42808 9.75146 7.42993 9.75116 7.43262C9.75001 7.44265 9.74458 7.46304 9.72525 7.49314C9.72522 7.4932 9.72518 7.49326 9.72514 7.49332L7.86959 10.3529L7.86924 10.3534C7.83227 10.4109 7.79863 10.418 7.78568 10.418C7.77272 10.418 7.73908 10.4109 7.70211 10.3534L7.70177 10.3529L5.84621 7.49332C5.84617 7.49325 5.84612 7.49318 5.84608 7.49311C5.82677 7.46302 5.82135 7.44264 5.8202 7.43262C5.81989 7.42993 5.81987 7.42808 5.81994 7.42691C5.82469 7.42274 5.84655 7.40664 5.91071 7.40664H6.96578H7.11578V7.25664V0.633865C7.11578 0.42434 7.29014 0.249976 7.49967 0.249976H8.07169C8.28121 0.249976 8.45558 0.42434 8.45558 0.633865V7.25664Z"
+                              fill="currentColor"
+                              stroke="currentColor"
+                              strokeWidth="0.3"
+                            />
+                          </svg>
+                        </button>
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-12 py-3.5 text-xl font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                      >
+                        Applied Time
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-4 py-3.5 text-xl font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                      >
+                        Sub Category
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-4 py-3.5 text-xl font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                      >
+                        Email
+                      </th>
+                      <th scope="col" className="relative py-3.5 px-4">
+                        <span className="sr-only"></span>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
+                    {categoryJob.map((job) => (
+                      <tr>
+                        <td className="px-4 py-4 text-xl font-medium whitespace-nowrap">
+                          <div>
+                            <p className="text-xl font-bold text-gray-600 dark:text-gray-400">
+                              {job.jobTitle}
+                            </p>
+                          </div>
+                        </td>
+                        <td className="px-12 py-4 text-xl font-medium whitespace-nowrap">
+                          <div className="inline px-3 py-1 text-xl font-normal rounded-full text-emerald-500 gap-x-2 bg-emerald-100/60 dark:bg-gray-800">
+                            {job.AppliedTime}
+                          </div>
+                        </td>
+                        <td className="px-4 py-4 text-xl whitespace-nowrap">
+                          <div>
+                            <p className="text-gray-500 dark:text-gray-400 font-semibold">
+                              {job.jobType}
+                            </p>
+                          </div>
+                        </td>
+
+                        <td className="px-4 py-4 text-xl whitespace-nowrap">
+                          {job.email}
+                        </td>
+                        <td className="px-4 py-4 text-xl whitespace-nowrap">
+                          <Link to={`/appliedApplicants/${job._id}`}>
+                            <button className="btn flex items-center mt-4 text-gray-700 dark:text-gray-200">
+                              <BiDetail className="w-6 h-6" />
+                              <h1 className=" text-xl">View Summary</h1>
+                            </button>
+                          </Link>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </div>

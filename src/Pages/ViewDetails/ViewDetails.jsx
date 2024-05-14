@@ -6,7 +6,6 @@ import { AuthContext } from "../../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 
-
 const ViewDetails = () => {
   const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
@@ -48,9 +47,9 @@ const ViewDetails = () => {
       toast.success("Applied Successfully");
       const showModal = false;
       setShowModal(showModal);
-      setTimeout(() => {
-        window.location.href ='/appliedJobs'
-      }, 2000);
+      // setTimeout(() => {
+      //   window.location.href = "/appliedJobs";
+      // }, 1500);
     },
   });
   // Get todays date
@@ -59,14 +58,15 @@ const ViewDetails = () => {
     const year = today.getFullYear();
     const month = (today.getMonth() + 1).toString().padStart(2, "0");
     const day = today.getDate().toString().padStart(2, "0");
-    return `${year}-${month}-${day}`;
+    return `${year}/${month}/${day}`;
   }
-  // applicant info
-  // let resumeLink;
+
   const closeModal = () => {
     const showModal = false;
     setShowModal(showModal);
   };
+
+  // applicant info
   const applicantInfo = {
     name: user?.displayName,
     email: user?.email,
@@ -80,7 +80,19 @@ const ViewDetails = () => {
     jobImage: JobDetails?.categoryImage,
     AppliedTime: getDateToday(),
     deadline: JobDetails?.applicationDeadLine,
-    // applicantResume: resumeLink,
+  };
+  // deadline date confirmation
+  const deadLineOver = () => {
+    const date1 = JobDetails?.applicationDeadLine;
+    const date2 = getDateToday();
+    const deadLine = new Date(date1);
+    const applying = new Date(date2);
+    deadLine.setHours(0, 0, 0, 0);
+    applying.setHours(0, 0, 0, 0);
+    // console.log(date1, date2);
+    console.log(deadLine, applying);
+    console.log(applying <= deadLine);
+    return applying <= deadLine;
   };
   const handleApplyForm = async (e) => {
     e.preventDefault();
@@ -95,12 +107,21 @@ const ViewDetails = () => {
         text: "You can't apply on your posted Job",
         footer: '<a href="#">Why do I have this issue?</a>',
       });
+    }
+
+    if (!deadLineOver()) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Application deadline has been over!",
+        footer: '<a href="#">Why do I have this issue?</a>',
+      });
     } else {
       await mutateAsync(jobId);
       // console.log("no matched");
     }
   };
-  // console.log(JobDetails);
+  console.log(JobDetails);
   return (
     <div className="relative">
       <section className={`shadow-2xl  rounded-3xl`}>

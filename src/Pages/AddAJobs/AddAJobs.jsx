@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import SERVER_API_URL from "../../api";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 const AddAJobs = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);
@@ -28,25 +29,24 @@ const AddAJobs = () => {
       console.log(data);
     },
     onSuccess: () => {
-      console.log("added to database");
+      toast.success("Job added successfully");
       refetch();
     },
   });
+
   function getDateToday() {
     const today = new Date();
     const year = today.getFullYear();
     const month = (today.getMonth() + 1).toString().padStart(2, "0");
     const day = today.getDate().toString().padStart(2, "0");
-    return `${year}-${month}-${day}`;
+    return `${year}/${month}/${day}`;
   }
   const applicationDeadLineString = (deadLineDate) => {
-    const deadLineDateString = startDate.toString();
-    const date = new Date(deadLineDateString);
-
-    const year = date.getFullYear().toString().slice(-2);
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    const formattedDate = `${year}-${month}-${day}`;
+    const deadLineString = deadLineDate.toLocaleDateString();
+    const ddmmyy = deadLineString.split("/");
+    console.log(ddmmyy);
+    const formattedDate = `${ddmmyy[2]}/${ddmmyy[1]}/${ddmmyy[0]}`;
+    console.log(formattedDate);
     return formattedDate;
   };
   // console.log(startDate.toString());

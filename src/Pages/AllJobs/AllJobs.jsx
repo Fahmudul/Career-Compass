@@ -34,6 +34,10 @@ const AllJobs = () => {
         className="input input-bordered w-full max-w-xs"
         onChange={(e) => setSearchValue(e.target.value)}
       />
+      <h1 className="text-xl font-bold my-5">
+        Total job{" "}
+        <span className="text-blue-500">{jobCategoriesInfo.length}</span>
+      </h1>
       <div className="flex flex-col mt-6">
         <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
