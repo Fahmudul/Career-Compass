@@ -40,11 +40,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/appliedJobs",
-        element: <AppliedJobs></AppliedJobs>,
+        element: (
+          <PrivateRoute>
+            <AppliedJobs></AppliedJobs>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/appliedApplicants/:id",
-        element: <SummaryPage></SummaryPage>,
+        element: (
+          <PrivateRoute>
+            <SummaryPage></SummaryPage>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/addJobs",
