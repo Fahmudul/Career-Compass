@@ -34,8 +34,8 @@ const UpdateJobInfo = () => {
     },
   });
 
-  console.log(JobDetails);
-  //   console.log(id);
+  // console.log(JobDetails);
+  //   // console.log(id);
   const { user } = useContext(AuthContext);
   const [startDate, setStartDate] = useState(new Date());
   //   const [jobPosteDate, setJobPostedDate] = useState("");
@@ -43,12 +43,12 @@ const UpdateJobInfo = () => {
   const applicationDeadLineString = (deadLineDate) => {
     const deadLineString = deadLineDate.toLocaleDateString();
     const ddmmyy = deadLineString.split("/");
-    console.log(ddmmyy);
+    // console.log(ddmmyy);
     const formattedDate = `${ddmmyy[2]}/${ddmmyy[1]}/${ddmmyy[0]}`;
-    console.log(formattedDate);
+    // console.log(formattedDate);
     return formattedDate;
   };
-  // console.log(startDate.toString());
+  // // console.log(startDate.toString());
 
   //   update form
   const handleUpdateFormData = async (e) => {
@@ -62,7 +62,6 @@ const UpdateJobInfo = () => {
     const categoryImage = form.photoUrl.value;
     const subcategory = form.subcategory.value;
     const postedTime = JobDetails.postedTime;
-    // const applicantNumber = parseInt(form.applicantNumber.value);
     const updatedJobInfo = {
       ownerEmail: user?.email,
       jobTitle: jobTitle,
@@ -76,13 +75,8 @@ const UpdateJobInfo = () => {
       ownerName: user?.displayName,
       applicationDeadLine: applicationDeadLineString(startDate),
     };
-    console.log(updatedJobInfo);
 
-    // console.log(import.meta.env.SERVER_API_URL);
-    // send jobData to server
     await mutateAsync(updatedJobInfo);
-
-    // console.log(SERVER_API_URL);
   };
   const borderRadius = {
     borderRadius: "0% 37% 31% 25% / 25% 45% 38% 0%",

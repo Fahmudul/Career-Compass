@@ -10,6 +10,7 @@
   --body_color: #cccccc;
   --link_color: #cccccc;
   --card_color: #212121;
+  --testimonial_color:#262525;
 }
 @tailwind base;
 @tailwind components;

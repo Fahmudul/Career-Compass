@@ -29,9 +29,9 @@ const SummaryPage = () => {
       pdf.save("invoice.pdf");
     });
   };
-  console.log(summaryData);
+  // console.log(summaryData);
   return (
-    <div className="border">
+    <div className="">
       <div
         className="max-w-[600px] bg-white mx-auto my-0 shadow-xl rounded-3xl p-6 summary "
         ref={pdfRef}

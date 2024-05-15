@@ -22,30 +22,33 @@ const AppliedJobs = () => {
       return data;
     },
   });
-  // console.log(appliedJobs)
-  // console.log(categoryJob);
+  // // console.log(appliedJobs)
+  // // console.log(categoryJob);
 
   const getSelectCategoryValue = (e) => {
-    // console.log(e.target.value);
+    // // console.log(e.target.value);
     const filteredValue = e.target.value;
     if (filteredValue == "All") {
       setCategoryJob(appliedJobs);
-      // console.log(categoryJob);
+      // // console.log(categoryJob);
     } else {
       const filteredCategory = appliedJobs.filter(
         (job) => job.jobType == filteredValue
       );
       setCategoryJob(filteredCategory);
-      // console.log(filteredCategory);
-      // console.log(categoryJob);
+      // // console.log(filteredCategory);
+      // // console.log(categoryJob);
     }
   };
-  // console.log(appliedJobs);
+  // // console.log(appliedJobs);
 
-  // console.log(categoryJob);
+  // // console.log(categoryJob);
   if (categoryJob.length <= 0) {
     return (
       <div>
+        <h1 className="text-5xl font-bold text-center mb-10">
+          Job Applications Dashboard
+        </h1>
         <p className="font-bold text-xl lg:text-4xl text-center ">
           No Job Applied yet!
         </p>
@@ -62,6 +65,9 @@ const AppliedJobs = () => {
   }
   return (
     <div className="">
+      <h1 className="text-5xl font-bold text-center mb-10">
+        Job Applications Dashboard
+      </h1>
       <div className="flex justify-end mb-5">
         <div className="flex items-center gap-x-3">
           <h1 className="text-xl font-bold ">SortBy</h1>

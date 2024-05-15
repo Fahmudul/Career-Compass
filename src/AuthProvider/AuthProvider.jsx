@@ -6,8 +6,11 @@ import {
   signOut,
 } from "firebase/auth";
 import auth from "../FireBaseConfig/FirebaseConfig";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
+import axios from "axios";
 export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
+  const axiosSecure = useAxiosSecure();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -27,14 +30,35 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentuser) => {
       if (currentuser) {
-        console.log("user changed");
         console.log(currentuser);
         setUser(currentuser);
         setLoading(false);
+        const loggedInUser = { email: currentuser.email };
+        axiosSecure.post("/jwt", loggedInUser);
       } else {
         setUser(null);
         setLoading(false);
+        axiosSecure.post("/logout").then((res) => console.log(res.data));
       }
+
+      // Way 2
+
+      // if (currentuser) {
+      //   // console.log("user changed");
+      //   console.log(currentuser);
+      //   setUser(currentuser);
+      //   setLoading(false);
+      //   const loggedInUser = { email: currentuser.email };
+      //   axios.post("http://localhost:5000/jwt", loggedInUser, {
+      //     withCredentials: true,
+      //   });
+      // } else {
+      //   setUser(null);
+      //   setLoading(false);
+      //   axios
+      //     .post("http://localhost:5000/logout")
+      //     .then((res) => console.log(res.data));
+      // }
     });
     return () => {
       unSubscribe();

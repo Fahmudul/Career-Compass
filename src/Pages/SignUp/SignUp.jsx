@@ -22,7 +22,7 @@ const SignUp = () => {
   const [photoUrl, setPhotoUrl] = useState("");
   const navigate = useNavigate();
   const locationn = useLocation();
-  // console.log(locationn.state);
+  // // console.log(locationn.state);
   const path = locationn.state || "/";
   const provider = new GoogleAuthProvider();
   const gitHubProvider = new GithubAuthProvider();

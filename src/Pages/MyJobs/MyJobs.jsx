@@ -20,7 +20,6 @@ const MyJobs = () => {
       const { data } = await axiosSecure(`/myPostedJobs/?email=${user.email}`);
       return data;
     },
-    
   });
   const { mutateAsync } = useMutation({
     mutationFn: async (id) => {
@@ -28,7 +27,7 @@ const MyJobs = () => {
       return data;
     },
     onSuccess: (data) => {
-      console.log(data);
+      // console.log(data);
       setDeletedCount(data?.deletedCount);
       refetch();
     },
@@ -48,7 +47,7 @@ const MyJobs = () => {
         mutateAsync(id);
 
         if (deletedCount > 0) {
-          console.log(deletedCount);
+          // console.log(deletedCount);
           Swal.fire({
             title: "Deleted!",
             text: "Job has been deleted.",
@@ -60,9 +59,12 @@ const MyJobs = () => {
     });
   };
 
-  console.log(myPostedJobs);
+  // console.log(myPostedJobs);
   return (
     <div>
+      <h1 className="text-5xl font-bold text-center mb-10">
+        Personal Job Listings
+      </h1>
       <div className="flex flex-col mt-6">
         <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">

@@ -14,10 +14,10 @@ const ViewDetails = () => {
   const handleShowModal = () => {
     const modalShow = true;
     setShowModal(modalShow);
-    // console.log(showModal);
+    // // console.log(showModal);
   };
 
-  // console.log(location.pathname);
+  // // console.log(location.pathname);
   const jobId = location.pathname.split("/").pop();
   // Tanstack query
   const {
@@ -32,8 +32,8 @@ const ViewDetails = () => {
       return data;
     },
   });
-  // console.log(user?.email);
-  // console.log(JobDetails?.ownerEmail);
+  // // console.log(user?.email);
+  // // console.log(JobDetails?.ownerEmail);
 
   const { mutateAsync } = useMutation({
     mutationFn: async (id) => {
@@ -89,9 +89,9 @@ const ViewDetails = () => {
     const applying = new Date(date2);
     deadLine.setHours(0, 0, 0, 0);
     applying.setHours(0, 0, 0, 0);
-    // console.log(date1, date2);
-    console.log(deadLine, applying);
-    console.log(applying <= deadLine);
+    // // console.log(date1, date2);
+    // console.log(deadLine, applying);
+    // console.log(applying <= deadLine);
     return applying <= deadLine;
   };
   const handleApplyForm = async (e) => {
@@ -100,7 +100,7 @@ const ViewDetails = () => {
     const resumeLink = form.resumelink.value;
     applicantInfo.applicantResume = resumeLink;
     if (user?.email == JobDetails?.ownerEmail) {
-      console.log("matched");
+      // console.log("matched");
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -116,10 +116,10 @@ const ViewDetails = () => {
       });
     } else {
       await mutateAsync(jobId);
-      console.log("no matched");
+      // console.log("no matched");
     }
   };
-  console.log(JobDetails);
+  // console.log(JobDetails);
   return (
     <div className="relative">
       <section className={`shadow-2xl  rounded-3xl`}>
@@ -145,12 +145,12 @@ const ViewDetails = () => {
                 <p className="text-gray-600 dark:text-gray-300 text-lg font-bold">
                   {JobDetails.minSalary}-{JobDetails.maxSalary}$
                 </p>
-                <p className="text-lg font-semibold">
+                <h1 className="text-lg font-semibold">
                   Already applied :{" "}
                   <span className="text-blue-500">
                     {JobDetails.applicantNumber}
                   </span>
-                </p>
+                </h1>
               </div>
               <div className="flex items-center justify-between mt-12 lg:justify-start">
                 <button className="btn bg-blue-400" onClick={handleShowModal}>

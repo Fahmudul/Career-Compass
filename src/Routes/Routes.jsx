@@ -9,7 +9,6 @@ import AddAJobs from "../Pages/AddAJobs/AddAJobs";
 import MyJobs from "../Pages/MyJobs/MyJobs";
 import Blogs from "../Pages/Blogs/Blogs";
 import PrivateRoute from "./PrivateRoute";
-import SERVER_API_URL from "../api";
 import ViewDetails from "../Pages/ViewDetails/ViewDetails";
 import UpdateJobInfo from "../Pages/MyJobs/UpdateJobInfo";
 import ErrorElement from "../ErrorElement/ErrorElement";
@@ -23,7 +22,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        loader: () => fetch(`${SERVER_API_URL}/allJobsCategory`),
+        loader: () => fetch(`${import.meta.env.VITE_API_URL}/allJobsCategory`),
       },
       {
         path: "/signin",
@@ -36,11 +35,11 @@ const router = createBrowserRouter([
       {
         path: "/allJobs",
         element: <AllJobs></AllJobs>,
-        // loader: () => fetch(`${SERVER_API_URL}/allJobsCategory`),
       },
       {
         path: "/appliedJobs",
         element: (
+          // 
           <PrivateRoute>
             <AppliedJobs></AppliedJobs>
           </PrivateRoute>

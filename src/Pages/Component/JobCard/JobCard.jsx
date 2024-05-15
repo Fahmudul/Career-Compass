@@ -15,7 +15,7 @@ const JobCard = ({ job }) => {
   } = job;
   return (
     <div>
-      <div className="min-w-xl max-w-[400px] overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 relative">
+      <div className="min-w-xl max-w-[400px] overflow-hidden viewDetails rounded-lg shadow-md dark:bg-gray-800 relative">
         <img
           className="object-cover w-full h-64"
           src={categoryImage}
@@ -52,20 +52,22 @@ const JobCard = ({ job }) => {
                 </p>
               </div>
               <div className="font-semibold text-lg">
-                <p>
+                <h1>
                   Budget <br />{" "}
                   <span>
                     {minSalary}-{maxSalary}$
                   </span>
-                </p>
-                <p>
+                </h1>
+                <h1>
                   Applied : <span>{applicantNumber}</span>
-                </p>
+                </h1>
               </div>
             </div>
             <div className="flex items-center justify-center">
               <Link to={`/jobDetails/${_id}`}>
-                <button className="btn">View details</button>
+                <button className="btn bg-blue-400">
+                  <p>View details</p>
+                </button>
               </Link>
             </div>
           </div>

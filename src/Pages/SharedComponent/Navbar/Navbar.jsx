@@ -58,7 +58,7 @@ const Navbar = () => {
       .catch((error) => {
         console.error(error);
       });
-    // console.log(user);
+    // // console.log(user);
   };
   return (
     <div
@@ -75,7 +75,7 @@ const Navbar = () => {
             <div
               tabIndex={0}
               role="button"
-              className="btn btn-ghost lg:hidden px-0"
+              className="btn bg-blue-400 lg:hidden px-0"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -106,7 +106,7 @@ const Navbar = () => {
                   <div className="flex gap-2 lg:space-x-5 items-center">
                     <button
                       onClick={handleSignOut}
-                      className="btn btn-ghost  text-white text-lg"
+                      className="btn bg-blue-400  text-white text-lg"
                     >
                       Log Out
                     </button>
@@ -115,7 +115,7 @@ const Navbar = () => {
                   <div className="  lg:hidden">
                     <Link
                       to="/signin"
-                      className="btn btn-ghost   text-white text-base mr-3"
+                      className="btn bg-blue-400   text-white text-base mr-3"
                     >
                       Login
                     </Link>
@@ -144,9 +144,9 @@ const Navbar = () => {
               />
               <button
                 onClick={handleSignOut}
-                className="btn btn-ghost  text-[#8a8686]  text-lg hidden md:block lg:block"
+                className="btn bg-blue-400  text-[#8a8686]  text-lg hidden md:block lg:block"
               >
-                Log Out
+                <p>Log Out</p>
               </button>
             </div>
           ) : (
@@ -154,9 +154,9 @@ const Navbar = () => {
               <DarkLightSwitch></DarkLightSwitch>
               <Link
                 to="/signin"
-                className="btn btn-ghost   text-[#8a8686]  text-base mr-3  hidden md:hidden items-center lg:flex  ml-2"
+                className="btn bg-blue-400   text-[#8a8686]  text-base mr-3  hidden md:hidden items-center lg:flex  ml-2"
               >
-                Login
+                <p>Log in</p>
               </Link>
             </div>
           )}

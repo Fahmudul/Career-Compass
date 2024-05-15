@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <div className=" lg:mt-[100px]">
-      <div className="mx-auto  py-16 xl:px-20 lg:px-12 sm:px-6 px-4 bg-[#dad7d7]">
+      <div className="mx-auto  py-16 xl:px-20 lg:px-12 sm:px-6 px-4 bg-[#dad7d7] viewDetails">
         {/*- more free and premium Tailwind CSS components at https://tailwinduikit.com/ -*/}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 md:gap-8 gap-4">
           <div className="flex flex-col flex-shrink-0">
@@ -17,18 +17,14 @@ const Footer = () => {
                 to="/"
                 className="text-2xl flex items-center font-bold lg:w-auto md:w-full "
               >
-                <HiOutlineUserGroup className="w-10 h-10 text-black" />
-                <p className="ml-1">
+                <HiOutlineUserGroup className="w-10 h-10 " />
+                <h1 className="ml-1">
                   <span className="text-5xl">C</span>areerCompass
-                </p>
+                </h1>
               </Link>
             </div>
-            <p className="text-sm leading-none text-gray-800 mt-4 dark:text-white">
-              Copyright © 2021 Luxe
-            </p>
-            <p className="text-sm leading-none text-gray-800 mt-4 dark:text-white">
-              All rights reserved
-            </p>
+            <h1 className="text-sm leading-none mt-4">Copyright © 2021 Luxe</h1>
+            <h1 className="text-sm leading-none mt-4">All rights reserved</h1>
             <div className="flex items-center gap-x-4 mt-12">
               <button
                 aria-label="instagram"
@@ -109,77 +105,73 @@ const Footer = () => {
             </div>
           </div>
           <div className="sm:ml-0 ml-8 flex flex-col">
-            <h2 className="text-base font-semibold leading-4 text-gray-800 dark:text-white">
-              Company
-            </h2>
-            <a
+            <h2 className="text-base font-semibold leading-4 ">Company</h2>
+            <h1
               href="javascript:void(0)"
-              className="focus:outline-none focus:underline hover:text-gray-500 text-base leading-4 mt-6 text-gray-800 dark:text-white cursor-pointer"
+              className="focus:outline-none focus:underline hover:text-gray-500 text-base leading-4 mt-6  cursor-pointer"
             >
               Blog
-            </a>
-            <a
+            </h1>
+            <h1
               href="javascript:void(0)"
-              className="focus:outline-none focus:underline hover:text-gray-500 text-base leading-4 mt-6 text-gray-800 dark:text-white cursor-pointer"
+              className="focus:outline-none focus:underline hover:text-gray-500 text-base leading-4 mt-6  cursor-pointer"
             >
               Pricing
-            </a>
-            <a
+            </h1>
+            <h1
               href="javascript:void(0)"
-              className="focus:outline-none focus:underline hover:text-gray-500 text-base leading-4 mt-6 text-gray-800 dark:text-white cursor-pointer"
+              className="focus:outline-none focus:underline hover:text-gray-500 text-base leading-4 mt-6  cursor-pointer"
             >
               About Us
-            </a>
-            <a
+            </h1>
+            <h1
               href="javascript:void(0)"
-              className="focus:outline-none focus:underline hover:text-gray-500 text-base leading-4 mt-6 text-gray-800 dark:text-white cursor-pointer"
+              className="focus:outline-none focus:underline hover:text-gray-500 text-base leading-4 mt-6  cursor-pointer"
             >
               Contact us
-            </a>
-            <a
+            </h1>
+            <h1
               href="javascript:void(0)"
-              className="focus:outline-none focus:underline hover:text-gray-500 text-base leading-4 mt-6 text-gray-800 dark:text-white cursor-pointer"
+              className="focus:outline-none focus:underline hover:text-gray-500 text-base leading-4 mt-6  cursor-pointer"
             >
               Testimonials
-            </a>
+            </h1>
           </div>
           <div className="flex flex-col">
-            <h2 className="text-base font-semibold leading-4 text-gray-800 dark:text-white">
-              Support
-            </h2>
-            <a
+            <h2 className="text-base font-semibold leading-4 ">Support</h2>
+            <h1
               href="javascript:void(0)"
-              className="focus:outline-none focus:underline hover:text-gray-500 text-base leading-4 mt-6 text-gray-800 dark:text-white cursor-pointer"
+              className="focus:outline-none focus:underline hover:text-gray-500 text-base leading-4 mt-6  cursor-pointer"
             >
               Legal policy
-            </a>
-            <a
+            </h1>
+            <h1
               href="javascript:void(0)"
-              className="focus:outline-none focus:underline hover:text-gray-500 text-base leading-4 mt-6 text-gray-800 dark:text-white cursor-pointer"
+              className="focus:outline-none focus:underline hover:text-gray-500 text-base leading-4 mt-6  cursor-pointer"
             >
               Status policy
-            </a>
-            <a
+            </h1>
+            <h1
               href="javascript:void(0)"
-              className="focus:outline-none focus:underline hover:text-gray-500 text-base leading-4 mt-6 text-gray-800 dark:text-white cursor-pointer"
+              className="focus:outline-none focus:underline hover:text-gray-500 text-base leading-4 mt-6  cursor-pointer"
             >
               Privacy policy
-            </a>
-            <a
+            </h1>
+            <h1
               href="javascript:void(0)"
-              className="focus:outline-none focus:underline hover:text-gray-500 text-base leading-4 mt-6 text-gray-800 dark:text-white cursor-pointer"
+              className="focus:outline-none focus:underline hover:text-gray-500 text-base leading-4 mt-6  cursor-pointer"
             >
               Terms of service
-            </a>
+            </h1>
           </div>
           <div className="mt-10 lg:block hidden">
-            <label className="text-xl font-medium leading-5 text-gray-800 dark:text-white">
+            <label className="text-xl font-medium leading-5 ">
               Get updates
             </label>
             <div className="cursor-pointer flex items-center justify-between border border-gray-800 dark:border-white mt-4">
               <input
                 type="text"
-                className="text-base leading-4 p-4 w-full focus:outline-none text-gray-800 dark:text-white dark:placeholder-white dark:bg-gray-900 dark:border-white placeholder-gray-800"
+                className="text-base leading-4 p-4 w-full focus:outline-none  dark:placeholder-white dark:bg-gray-900 dark:border-white placeholder-gray-800"
                 placeholder="Enter your email"
               />
               <button
@@ -204,9 +196,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="mt-10 lg:hidden">
-          <label className="text-xl font-medium leading-5 text-gray-800 dark:text-white">
-            Get updates
-          </label>
+          <label className="text-xl font-medium leading-5 ">Get updates</label>
           <div className="flex items-center justify-between border border-gray-800 dark:border-white mt-4">
             <input
               type="text"

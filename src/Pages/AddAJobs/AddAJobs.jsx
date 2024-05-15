@@ -2,17 +2,15 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import SERVER_API_URL from "../../api";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 const AddAJobs = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);
   const [startDate, setStartDate] = useState(new Date());
   const [jobPosteDate, setJobPostedDate] = useState("");
-  // Tanstack Query
-  const queryClient = useQueryClient();
+
   const {
     data = [],
     isLoading,
@@ -26,10 +24,13 @@ const AddAJobs = () => {
   const { mutateAsync } = useMutation({
     mutationFn: async (info) => {
       const data = await axiosSecure.post(`/allJobsCategory`, info);
-      console.log(data);
+      // console.log(data);
     },
     onSuccess: () => {
       toast.success("Job added successfully");
+      setTimeout(() => {
+        window.location.href = "/myJobs";
+      }, 1500);
       refetch();
     },
   });
@@ -44,12 +45,12 @@ const AddAJobs = () => {
   const applicationDeadLineString = (deadLineDate) => {
     const deadLineString = deadLineDate.toLocaleDateString();
     const ddmmyy = deadLineString.split("/");
-    console.log(ddmmyy);
+    // console.log(ddmmyy);
     const formattedDate = `${ddmmyy[2]}/${ddmmyy[1]}/${ddmmyy[0]}`;
-    console.log(formattedDate);
+    // console.log(formattedDate);
     return formattedDate;
   };
-  // console.log(startDate.toString());
+  // // console.log(startDate.toString());
   useEffect(() => {
     setJobPostedDate(getDateToday());
   }, []);
@@ -81,17 +82,17 @@ const AddAJobs = () => {
       applicationDeadLine: applicationDeadLineString(startDate),
     };
 
-    // console.log(import.meta.env.SERVER_API_URL);
     // send jobData to server
     await mutateAsync(JobInfo);
-
-    // console.log(SERVER_API_URL);
   };
   const polygonStyle = {
     clipPath: "polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%)",
   };
   return (
     <div>
+      <h1 className="lg:text-5xl font-bold text-center mb-10">
+        Post a Job Opportunity
+      </h1>
       <div className=" rounded-3xl flex flex-col lg:flex-row bg-[#ccc] justify-between w-[90%] mx-auto">
         <div
           className=" -green-500 flex justify-center items-center rounded-tl-3xl  rounded-bl-3xl  bg-[#818586] w-[30%]"

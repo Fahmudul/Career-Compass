@@ -8,6 +8,7 @@ import auth from "../../FireBaseConfig/FirebaseConfig";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
 import { Helmet } from "react-helmet";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 // import "../../Utility.css";
 const Signin = () => {
   const { logIn } = useContext(AuthContext);
@@ -16,11 +17,12 @@ const Signin = () => {
   const provider = new GoogleAuthProvider();
   const navigate = useNavigate();
   const location = useLocation();
-  // console.log(location.state);
+  const axiosSecure = useAxiosSecure();
+  // // console.log(location.state);
   const path = location.state || "/";
-  // console.log(location.state);
-  // console.log(navigate)
-  const handleSignIn = (e) => {
+  // // console.log(location.state);
+  // // console.log(navigate)
+  const handleSignIn = async (e) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
     const email = data.get("email");
@@ -28,10 +30,11 @@ const Signin = () => {
     logIn(email, password)
       .then((result) => {
         toast.success("Logged in Successfully");
-        setTimeout(function () {
-          // window.location.href = "/";
-          navigate(path, { replace: true });
-        }, 2000);
+        
+        // setTimeout(function () {
+        //   // window.location.href = "/";
+        //   navigate(path, { replace: true });
+        // }, 2000);
       })
       .catch((error) => {
         const errorMessages = error.message;
@@ -43,7 +46,7 @@ const Signin = () => {
   };
   const handleShowPassword = () => {
     setShow(!show);
-    console.log(show);
+    // console.log(show);
   };
   const handleGoogleSignIn = () => {
     signInWithPopup(auth, provider)

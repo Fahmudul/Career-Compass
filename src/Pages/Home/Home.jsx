@@ -21,18 +21,20 @@ import { Link, useLoaderData } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import "./Home.css";
 import JobCard from "../Component/JobCard/JobCard";
+import { useState } from "react";
+import Testimonial from "../Component/Testimonial/Testimonial";
+import FAQs from "../Component/FAQ/FAQ";
 function JobCategoryCard({ title, description }) {
   return (
     <div className="lg:w-[35%] text-left  shadow-lg rounded-lg overflow-hidden m-4 bg-blur text-white">
       <div className="p-6 flex flex-col gap-y-2">
-        <Slide>
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 text-[#e8e3e3]">
-            {title}
-          </h1>
-          <p className=" text-xl mb-4 text-[#afaaaa]">{description}</p>
-        </Slide>
-        <Slide direction="right">
-          <Link className="btn btn-ghost bg-gray-800 flex text-white font-bold py-2 px-4 rounded-full text-center ">
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 text-[#e8e3e3]">
+          {title}
+        </h1>
+        <p className=" text-xl mb-4 text-[#afaaaa]">{description}</p>
+
+        <Slide direction="up">
+          <Link className="btn btn-ghost bg-blue-400 flex text-white font-bold py-2 px-4 rounded-full text-center ">
             See More
           </Link>
         </Slide>
@@ -42,28 +44,32 @@ function JobCategoryCard({ title, description }) {
 }
 
 const Home = () => {
+  // show all button state
+  const [showAll, setShowAll] = useState(false);
+
   // Get list of Job data from data base
   const jobCategoriesInfo = useLoaderData();
-  // console.log(jobCategoriesInfo);
+  // // console.log(jobCategoriesInfo);
   const onSiteJobs = jobCategoriesInfo.filter(
     (job) => job.subcategory === "On-Site Job"
   );
-  // console.log("onSiteJobs", onSiteJobs);
+  // // console.log("onSiteJobs", onSiteJobs);
   const remoteJobs = jobCategoriesInfo.filter(
     (job) => job.subcategory === "Remote Job"
   );
-  // console.log("remoteJobs", remoteJobs);
+  // // console.log("remoteJobs", remoteJobs);
   const hybridJobs = jobCategoriesInfo.filter(
     (job) => job.subcategory === "Hybrid"
   );
-  // console.log("hybridJobs", hybridJobs);
+  // // console.log("hybridJobs", hybridJobs);
   const partTimeJobs = jobCategoriesInfo.filter(
     (job) => job.subcategory === "Part-Time"
   );
-  // console.log("partTimeJobs", partTimeJobs);
+  // // console.log("partTimeJobs", partTimeJobs);
   const tabStyle = {
     padding: "0px 10px",
   };
+  // console.log(showAll);
   return (
     <div>
       {/**Dynamic title */}
@@ -137,35 +143,67 @@ const Home = () => {
           </TabList>
 
           <TabPanel>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-9">
-              {onSiteJobs.map((job) => (
-                <JobCard key={job._id} job={job}></JobCard>
-              ))}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-9 gap-x-7">
+              {showAll
+                ? onSiteJobs.map((job) => (
+                    <JobCard key={job._id} job={job}></JobCard>
+                  ))
+                : onSiteJobs
+                    .slice(0, 8)
+                    .map((job) => <JobCard key={job._id} job={job}></JobCard>)}
             </div>
           </TabPanel>
           <TabPanel>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-9">
-              {remoteJobs.map((job) => (
-                <JobCard key={job._id} job={job}></JobCard>
-              ))}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-9 gap-x-7">
+              {showAll
+                ? remoteJobs.map((job) => (
+                    <JobCard key={job._id} job={job}></JobCard>
+                  ))
+                : remoteJobs
+                    .slice(0, 8)
+                    .map((job) => <JobCard key={job._id} job={job}></JobCard>)}
             </div>
           </TabPanel>
           <TabPanel>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-9">
-              {hybridJobs.map((job) => (
-                <JobCard key={job._id} job={job}></JobCard>
-              ))}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-9 gap-x-7">
+              {showAll
+                ? hybridJobs.map((job) => (
+                    <JobCard key={job._id} job={job}></JobCard>
+                  ))
+                : hybridJobs
+                    .slice(0, 8)
+                    .map((job) => <JobCard key={job._id} job={job}></JobCard>)}
             </div>
           </TabPanel>
           <TabPanel>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-9">
-              {partTimeJobs.map((job) => (
-                <JobCard key={job._id} job={job}></JobCard>
-              ))}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-9 gap-x-7">
+              {showAll
+                ? partTimeJobs.map((job) => (
+                    <JobCard key={job._id} job={job}></JobCard>
+                  ))
+                : partTimeJobs
+                    .slice(0, 8)
+                    .map((job) => <JobCard key={job._id} job={job}></JobCard>)}
             </div>
           </TabPanel>
         </Tabs>
+        <div className="flex justify-center mt-5">
+          <button
+            className="btn btn-ghost"
+            onClick={() => {
+              setShowAll(!showAll);
+            }}
+          >
+            {showAll ? "Show less" : "Show more"}
+          </button>
+        </div>
       </div>
+
+      {/**Testimonial */}
+      <Testimonial />
+
+      {/**Testimonial */}
+      <FAQs />
     </div>
   );
 };

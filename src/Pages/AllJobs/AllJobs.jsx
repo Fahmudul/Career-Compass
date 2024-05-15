@@ -6,7 +6,7 @@ import { useState } from "react";
 const AllJobs = () => {
   const axiosSecure = useAxiosSecure();
   const [searchValue, setSearchValue] = useState("");
-  // console.log(searchValue)
+  // // console.log(searchValue)
   const {
     isPending,
     isError,
