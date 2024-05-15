@@ -57,7 +57,7 @@ const AppliedJobs = () => {
             to="/allJobs"
             className="text-blue-500 font-bold text-lg underline "
           >
-            Apply from here ->
+            Apply from here {"->"}
           </Link>
         </p>
       </div>
@@ -149,8 +149,8 @@ const AppliedJobs = () => {
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
-                    {categoryJob.map((job) => (
-                      <tr>
+                    {categoryJob.map((job, idx) => (
+                      <tr key={idx}>
                         <td className="px-4 py-4 text-xl font-medium whitespace-nowrap">
                           <div>
                             <p className="text-xl font-bold text-gray-600 dark:text-gray-400">
