@@ -31,10 +31,10 @@ const Signin = () => {
       .then((result) => {
         toast.success("Logged in Successfully");
 
-        // setTimeout(function () {
-        //   // window.location.href = "/";
-        //   navigate(path, { replace: true });
-        // }, 2000);
+        setTimeout(function () {
+          // window.location.href = "/";
+          navigate(path, { replace: true });
+        }, 2000);
       })
       .catch((error) => {
         const errorMessages = error.message;
@@ -53,9 +53,8 @@ const Signin = () => {
       .then((result) => {
         const photoUrl = result.user?.photoURL;
         setPhotoUrl(photoUrl);
-        toast.success("Successfully created your account");
+        toast.success("Logged in Successfully");
         setTimeout(function () {
-          location.reload();
           navigate(path, { replace: true });
         }, 2000);
       })

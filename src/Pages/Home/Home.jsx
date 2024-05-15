@@ -131,6 +131,9 @@ const Home = () => {
         <Tabs className=" text-center">
           <TabList style={{ marginBottom: "60px" }}>
             <Tab style={{ padding: "5px 20px", fontSize: "20px" }}>
+              All Jobs
+            </Tab>
+            <Tab style={{ padding: "5px 20px", fontSize: "20px" }}>
               On-Site Job
             </Tab>
             <Tab style={{ padding: "5px 20px", fontSize: "20px" }}>
@@ -142,6 +145,17 @@ const Home = () => {
             </Tab>
           </TabList>
 
+          <TabPanel>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-9 gap-x-7">
+              {showAll
+                ? jobCategoriesInfo.map((job) => (
+                    <JobCard key={job._id} job={job}></JobCard>
+                  ))
+                : jobCategoriesInfo
+                    .slice(0, 8)
+                    .map((job) => <JobCard key={job._id} job={job}></JobCard>)}
+            </div>
+          </TabPanel>
           <TabPanel>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-9 gap-x-7">
               {showAll

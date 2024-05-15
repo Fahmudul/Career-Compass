@@ -12,6 +12,7 @@ const JobCard = ({ job }) => {
     _id,
     jobTitle,
     description,
+    subcategory,
   } = job;
   return (
     <div>
@@ -47,9 +48,12 @@ const JobCard = ({ job }) => {
                   src="https://images.unsplash.com/photo-1586287011575-a23134f797f9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=48&q=60"
                   alt="Avatar"
                 />
-                <p className="mx-2 font-semibold text-gray-700 dark:text-gray-200 ">
-                  {ownerName}
-                </p>
+                <div>
+                  <p className="mx-2 font-semibold text-gray-700 dark:text-gray-200 ">
+                    {ownerName}
+                  </p>
+                  <p className="text-gray-700 ">{subcategory}</p>
+                </div>
               </div>
               <div className="font-semibold text-lg">
                 <h1>
