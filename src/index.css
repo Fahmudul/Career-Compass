@@ -3,6 +3,8 @@
   --body_color: #333333;
   --link_color: #666666;
   --card_color: white;
+  --testimonial_color:#e2e2e2;
+
 }
 
 [data-theme="dark"] {

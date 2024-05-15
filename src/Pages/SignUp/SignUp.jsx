@@ -83,7 +83,7 @@ const SignUp = () => {
         <link rel="canonical" href="http://mysite.com/example" />
       </Helmet>
       <div
-        className="card shrink-0 w-full max-w-sm shadow-2xl bg-[#979696] "
+        className="card shrink-0 w-full max-w-sm shadow-2xl testimonial_card shadow-2xl "
         style={{ height: "600px", display: "block" }}
       >
         <h1 className=" text-center text-xl font-bold mt-4 text-white">

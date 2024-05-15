@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const PrivateRoute = ({ children }) => {
   const location = useLocation();
@@ -18,6 +19,7 @@ const PrivateRoute = ({ children }) => {
   }
 
   if (!user) {
+    toast.error("You must login first");
     return <Navigate to="/signin" state={location.pathname} replace={true} />;
   }
 };

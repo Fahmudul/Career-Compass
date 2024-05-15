@@ -30,7 +30,7 @@ const Signin = () => {
     logIn(email, password)
       .then((result) => {
         toast.success("Logged in Successfully");
-        
+
         // setTimeout(function () {
         //   // window.location.href = "/";
         //   navigate(path, { replace: true });
@@ -71,7 +71,7 @@ const Signin = () => {
         <title>CareerCompass | Login</title>
         <link rel="canonical" href="http://mysite.com/example" />
       </Helmet>
-      <div className="card shrink-0 w-full max-w-sm  bg-blur bg-[#979696]">
+      <div className="card shrink-0 w-full max-w-sm  testimonial_card shadow-2xl">
         <h1 className=" text-center text-xl font-bold mt-4">Welcome Back!</h1>
         <form className="card-body pb-0" onSubmit={handleSignIn}>
           <div className="form-control relative">
