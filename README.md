@@ -1,6 +1,16 @@
-# CareerCompass
 
-CareerCompass is a painting and drawing store website where users can explore various artworks, add their own creations, manage their profile, and interact with other users. The website features both a dark and light theme for better user experience.
+
+## Career Compass: Chart Your Course to Career Success
+
+Career Compass is your one-stop shop for navigating your professional journey. We empower you to find the perfect job by providing a comprehensive suite of tools and resources:
+
+* **Job Search:** Discover a curated selection of open positions tailored to your skills and interests. 
+* **Career Exploration:**  Unearth your ideal career path through interactive assessments and insightful guidance.
+* **Resume & Cover Letter Support:** Craft compelling application materials that showcase your unique value with our resume builder and cover letter templates.
+* **Career Coaching:**  Connect with experienced professionals who offer personalized career advice and support.
+
+Let Career Compass be your trusted partner on the road to career fulfillment.
+
 
 Live Site: [CareerCompass](https://careercomapass.web.app/)
 
